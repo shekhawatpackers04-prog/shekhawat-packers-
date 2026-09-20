@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Home Page -->
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/logo.webp</image:loc>
+      <image:title>Shekhawat Packers Logo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Products Page -->
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/products.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/images/corrugated-box.webp</image:loc>
+      <image:title>Wholesale Corrugated Shipping Boxes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/images/adhesive-tape.png</image:loc>
+      <image:title>BOPP Self-Adhesive Packaging Tapes</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/images/plastic-bag.webp</image:loc>
+      <image:title>High Quality Plastic Bags Gandhi Nagar</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/images/jute-bag.webp</image:loc>
+      <image:title>Eco-Friendly Jute Bags and Sacks</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/images/plastic-rope.webp</image:loc>
+      <image:title>High Tensile Polypropylene Plastic Rope</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://shekhawat-packers.netlify.app/images/permanent-marker.webp</image:loc>
+      <image:title>Carton Labelling Permanent Markers</image:title>
+    </image:image>
+  </url>
+
+  <!-- About Us -->
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/about.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Us -->
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/contact.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Index -->
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/blog.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/blog/how-to-choose-corrugated-box.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/blog/importance-of-quality-bopp-tapes.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/blog/eco-friendly-packaging-solutions.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://shekhawat-packers.netlify.app/blog/wholesale-packaging-cost-reduction.html</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

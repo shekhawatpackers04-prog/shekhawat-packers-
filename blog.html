@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/webp" href="logo.webp">
+<link rel="manifest" href="site.webmanifest">
+<title>Packaging Blog &amp; Insights | Shekhawat Packers Gandhi Nagar</title>
+<meta name="description" content="Expert B2B packaging tips, box selection guides, and corrugated carton buying advice by Himmat Singh at Shekhawat Packers.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://shekhawat-packers.netlify.app/blog.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shekhawat-packers.netlify.app/blog.html">
+<meta property="og:title" content="Packaging Blog &amp; Insights | Shekhawat Packers">
+<meta property="og:description" content="Expert packaging tips, box buying guides, and industrial carton insights from Shekhawat Packers.">
+<meta property="og:image" content="https://shekhawat-packers.netlify.app/logo.webp">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Packaging Blog &amp; Insights | Shekhawat Packers">
+<meta name="twitter:description" content="Expert packaging tips and box buying advice from Himmat Singh.">
+<meta name="twitter:image" content="https://shekhawat-packers.netlify.app/logo.webp">
+
+<!-- Geo Meta Tags (Local SEO) -->
+<meta name="geo.region" content="IN-DL">
+<meta name="geo.placename" content="Gandhi Nagar, East Delhi">
+<meta name="geo.position" content="28.6628064;77.2661724">
+<meta name="ICBM" content="28.6628064, 77.2661724">
+
+<!-- Schema.org Breadcrumbs & Blog -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://shekhawat-packers.netlify.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://shekhawat-packers.netlify.app/blog.html"
+        }
+      ]
+    },
+    {
+      "@type": "Blog",
+      "name": "Shekhawat Packers Packaging Blog",
+      "description": "B2B packaging industry insights, box buying guides, and tape selection tips.",
+      "url": "https://shekhawat-packers.netlify.app/blog.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Shekhawat Packers",
+        "logo": "https://shekhawat-packers.netlify.app/logo.webp"
+      }
+    }
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.blog-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-bd);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
+  cursor: pointer;
+  position: relative;
+}
+.blog-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(232, 98, 42, 0.4);
+}
+.blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  color: var(--text-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.blog-meta span.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.blog-cat-pill {
+  background: var(--pill-bg);
+  color: var(--pill-color);
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 8.5px;
+}
+.blog-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-title);
+  line-height: 1.2;
+  margin: 0;
+  transition: color 0.2s;
+}
+.blog-card:hover .blog-card-title {
+  color: var(--orange);
+}
+.blog-excerpt {
+  font-size: 12px;
+  color: var(--text-desc);
+  line-height: 1.55;
+  margin: 0;
+}
+.blog-tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.blog-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.blog-read-btn {
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, transform 0.18s;
+}
+.blog-read-btn:hover {
+  background: var(--orange);
+  transform: translateY(-1px);
+}
+.blog-wa-btn {
+  color: #1da851;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+.blog-wa-btn:hover {
+  color: #0d8a3d;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+
+
+<div class="card-wrap">
+
+  <!-- ═══ LEFT SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="trusted-badge">
+      <i class="fa-solid fa-shield-halved"></i>
+      <span>Trusted Packaging<br>Supplier in Delhi NCR</span>
+    </div>
+
+    <a href="index.html" class="logo-ring-link" title="Shekhawat Packers Home">
+      <div class="logo-ring">
+        <div class="logo-wrap">
+          <img src="logo.webp" alt="Shekhawat Packers Logo" class="logo-img" onerror="this.src='https://shekhawat-packers.netlify.app/logo.webp'">
+        </div>
+      </div>
+    </a>
+
+    <div class="sidebar-rule"></div>
+
+    <div class="prod-tags-label">Topics Covered</div>
+    <div class="prod-tags">
+      <span class="prod-tag" onclick="filterBlogCategory('Packaging Tips')">Box Ply Guide</span>
+      <span class="prod-tag" onclick="filterBlogCategory('Product Guide')">Tape Microns</span>
+      <span class="prod-tag" onclick="filterBlogCategory('Sustainability')">Jute &amp; Eco</span>
+      <span class="prod-tag" onclick="filterBlogCategory('Cost Saving')">Cost Saving</span>
+    </div>
+
+    <div class="sidebar-badges">
+      <div class="sidebar-badge-item">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Expert Packaging Blog</span>
+      </div>
+      <div class="sidebar-badge-item">
+        <i class="fa-solid fa-industry"></i>
+        <span>Direct Factory Insights</span>
+      </div>
+      <div class="sidebar-badge-item">
+        <i class="fa-solid fa-comments"></i>
+        <span>Ask Himmat Singh</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ RIGHT CONTENT ═══ -->
+  <main class="content">
+
+    <!-- NAV BAR -->
+    <nav class="nav-bar">
+      <div class="nav-brand">Shekhawat <span>Packers</span></div>
+      <div class="nav-tabs">
+        <a href="index.html" class="nav-tab">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="products.html" class="nav-tab">
+          <i class="fa-solid fa-boxes-stacked"></i> Products
+        </a>
+        <a href="about.html" class="nav-tab">
+          <i class="fa-solid fa-circle-info"></i> About
+        </a>
+        <a href="blog.html" class="nav-tab active">
+          <i class="fa-solid fa-newspaper"></i> Blog
+        </a>
+        <a href="contact.html" class="nav-tab">
+          <i class="fa-solid fa-envelope"></i> Contact
+        </a>
+      </div>
+    </nav>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <div class="main-content">
+
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;">
+        <div>
+          <div class="eyebrow">B2B Packaging Insights &bull; Official Blog</div>
+          <h1 class="page-title">Packaging <span>Blog &amp; Insights</span></h1>
+          <p style="font-size: 11.5px; color: var(--text-label); margin-top: 2px;">
+            Expert advice, procurement tips, and packaging cost-reduction guides by Shekhawat Packers.
+          </p>
+        </div>
+      </div>
+
+      <!-- Blog Posts Dynamic Grid -->
+      <div id="blogPostsContainer" style="display:flex; flex-direction:column; gap:12px;">
+        <!-- Articles populated by JS from BLOG_POSTS_DATA and custom uploads -->
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BLOG ARTICLE FULL READER MODAL
+     ═══════════════════════════════════════════════════════════ -->
+<div class="popup-overlay" id="blogReaderModal" onclick="if(event.target===this)closeBlogReader()">
+  <div class="popup blog-modal">
+    
+    <!-- Modal Header -->
+    <div class="blog-modal-header">
+      <div>
+        <div class="blog-meta" id="readerMeta" style="margin-bottom:4px;">
+          <span class="blog-cat-pill" id="readerCategory">Packaging Tips</span>
+          <span class="dot"></span>
+          <span id="readerDate">Aug 2024</span>
+          <span class="dot"></span>
+          <span id="readerReadTime">4 min read</span>
+        </div>
+        <h2 class="blog-modal-title" id="readerTitle">Article Title</h2>
+      </div>
+      <button class="blog-modal-close-btn" onclick="closeBlogReader()" title="Close article">&times;</button>
+    </div>
+
+    <!-- Modal Body (Full Article Text) -->
+    <div class="blog-modal-body" id="readerContent">
+      <!-- Full article content loaded here -->
+    </div>
+
+    <!-- Author Byline -->
+    <div style="padding: 0 24px 16px;">
+      <div class="blog-author-box">
+        <div class="blog-author-avatar">
+          <i class="fa-solid fa-user-tie"></i>
+        </div>
+        <div style="font-size: 12px; line-height: 1.35;">
+          <strong style="color:var(--text-main); font-size:13px;" id="readerAuthor">Himmat Singh</strong><br>
+          <span style="color:var(--text-label); font-size:11px;" id="readerAuthorRole">Founder &amp; Packaging Expert &bull; Shekhawat Packers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Footer Actions -->
+    <div class="blog-modal-footer">
+      <a href="#" id="readerWhatsAppBtn" target="_blank" class="calc-order-btn" style="text-decoration:none; padding:9px 16px; font-size:12px;">
+        <i class="fa-brands fa-whatsapp"></i> Ask Himmat Singh About This
+      </a>
+      <button class="popup-btn popup-btn-secondary" style="padding:8px 18px;" onclick="closeBlogReader()">
+        Close Article
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/blog-data.js"></script>
+<script src="js/common.js"></script>
+<script>
+// Mapping of built-in posts to their standalone pages in blog/
+const STANDALONE_PAGES = {
+  'how-to-choose-corrugated-box': 'blog/how-to-choose-corrugated-box.html',
+  'importance-of-quality-bopp-tapes': 'blog/importance-of-quality-bopp-tapes.html',
+  'eco-friendly-packaging-solutions': 'blog/eco-friendly-packaging-solutions.html',
+  'wholesale-packaging-cost-reduction': 'blog/wholesale-packaging-cost-reduction.html'
+};
+
+// Render blog posts list into container
+function renderBlogPosts(categoryFilter = null) {
+  const container = document.getElementById('blogPostsContainer');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  // Get built-in posts
+  let allPosts = typeof BLOG_POSTS_DATA !== 'undefined' ? [...BLOG_POSTS_DATA] : [];
+
+  // Merge custom posts from localStorage (only published / public posts)
+  try {
+    const custom = JSON.parse(localStorage.getItem('sp_custom_blogs') || '[]');
+    custom.forEach(cp => {
+      // Exclude drafts or private posts
+      const isDraft = cp.status === 'draft' || cp.isPublic === false;
+      if (!isDraft && !allPosts.find(p => p.id === cp.id)) {
+        allPosts.unshift(cp);
+      }
+    });
+  } catch(e) {}
+
+  const posts = categoryFilter 
+    ? allPosts.filter(p => p.category === categoryFilter)
+    : allPosts;
+
+  posts.forEach(post => {
+    // Determine target standalone page URL
+    const pageUrl = STANDALONE_PAGES[post.id] || `post.html?id=${encodeURIComponent(post.id)}`;
+
+    const card = document.createElement('article');
+    card.className = 'blog-card';
+    card.setAttribute('data-id', post.id);
+
+    card.innerHTML = `
+      <div class="blog-meta">
+        <span class="blog-cat-pill">${post.category || 'Guide'}</span>
+        <span class="dot"></span>
+        <span><i class="fa-regular fa-clock"></i> ${post.readTime || '4 min'}</span>
+        <span class="dot"></span>
+        <span>By ${post.author || 'Himmat Singh'}</span>
+      </div>
+
+      <h2 class="blog-card-title">
+        <a href="${pageUrl}" style="color:inherit; text-decoration:none;">${post.title}</a>
+      </h2>
+
+      <p class="blog-excerpt">${post.summary}</p>
+
+      <div class="blog-actions-row">
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <a href="${pageUrl}" class="blog-read-btn" style="text-decoration:none;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Page
+          </a>
+          <button class="tool-btn" type="button" onclick="openBlogReader('${post.id}')" style="padding:6px 12px; font-size:11px;">
+            <i class="fa-solid fa-eye"></i> Quick View
+          </button>
+        </div>
+
+        <a class="blog-wa-btn" href="https://wa.me/919582392131?text=Hello%20Himmat%20Singh%20ji%2C%20I%20read%20your%20blog%20post%20on%20%22${encodeURIComponent(post.title)}%22%20and%20would%20like%20to%20discuss%20it." target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Ask on WhatsApp
+        </a>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// Open full article in reader modal
+function openBlogReader(id) {
+  let post = typeof BLOG_POSTS_DATA !== 'undefined' ? BLOG_POSTS_DATA.find(p => p.id === id) : null;
+  if (!post) {
+    try {
+      const custom = JSON.parse(localStorage.getItem('sp_custom_blogs') || '[]');
+      post = custom.find(p => p.id === id && p.status !== 'draft' && p.isPublic !== false);
+    } catch(e) {}
+  }
+  if (!post) return;
+
+  document.getElementById('readerCategory').textContent = post.category || 'Article';
+  document.getElementById('readerDate').textContent = post.date || 'Recent';
+  document.getElementById('readerReadTime').textContent = post.readTime || '4 min read';
+  document.getElementById('readerTitle').textContent = post.title;
+  document.getElementById('readerContent').innerHTML = post.content || `<p>${post.summary}</p>`;
+  document.getElementById('readerAuthor').textContent = post.author || 'Himmat Singh';
+  document.getElementById('readerAuthorRole').textContent = post.authorRole || 'Founder & Packaging Expert • Shekhawat Packers';
+
+  const waBtn = document.getElementById('readerWhatsAppBtn');
+  if (waBtn) {
+    waBtn.href = `https://wa.me/919582392131?text=Hello%20Himmat%20Singh%20ji%2C%20I%20just%20read%20your%20article%20on%20%22${encodeURIComponent(post.title)}%22.%20I%20have%20a%20question%20regarding%20our%20packaging%20supplies.`;
+  }
+
+  const modal = document.getElementById('blogReaderModal');
+  if (modal) {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Update URL hash for easy sharing
+  try {
+    history.pushState(null, '', '#' + id);
+  } catch(e) {}
+}
+
+// Close reader modal
+function closeBlogReader() {
+  const modal = document.getElementById('blogReaderModal');
+  if (modal) {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  try {
+    history.pushState(null, '', window.location.pathname);
+  } catch(e) {}
+}
+
+// Filter by category
+function filterBlogCategory(cat) {
+  renderBlogPosts(cat);
+  showToast(`Filtered by ${cat}`);
+}
+
+// Keyboard Escape listener
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeBlogReader();
+});
+
+// Initialize on page load and support deep links (e.g. blog.html#how-to-choose-corrugated-box)
+document.addEventListener('DOMContentLoaded', () => {
+  renderBlogPosts();
+
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    setTimeout(() => openBlogReader(hash), 150);
+  }
+});
+</script>
+</body>
+</html>

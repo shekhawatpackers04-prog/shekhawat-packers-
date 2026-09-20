@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/webp" href="logo.webp">
+<title>Blog Publishing Studio | Shekhawat Packers</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+.admin-card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-bd);
+  border-radius: 16px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: var(--bg-feature);
+  border: 1px solid var(--bg-feature-bd);
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+}
+.tool-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--item-border);
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.18s;
+}
+.tool-btn:hover {
+  background: var(--navy);
+  color: white;
+  border-color: var(--navy);
+}
+.content-textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--bg-input-bd);
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-family: monospace, sans-serif;
+  font-size: 12.5px;
+  line-height: 1.5;
+  outline: none;
+  resize: vertical;
+}
+.content-textarea:focus {
+  border-color: var(--orange);
+}
+.tabs-header {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--item-border);
+  padding-bottom: 8px;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-label);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  background: var(--navy);
+  color: white;
+}
+.live-preview-box {
+  background: var(--bg-card);
+  border: 1px dashed var(--item-border);
+  border-radius: 12px;
+  padding: 20px;
+  display: none;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+.live-preview-box.active {
+  display: block;
+}
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+@media (max-width: 680px) {
+  .action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.post-manage-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-feature);
+  border: 1px solid var(--bg-feature-bd);
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* Admin PIN Authentication Overlay */
+.admin-auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 33, 68, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.admin-auth-overlay.unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.admin-auth-card {
+  background: var(--bg-content);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  padding: 32px 28px;
+  max-width: 380px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+.auth-icon-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--peach);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 6px 18px rgba(30, 51, 105, 0.35);
+}
+.auth-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-title);
+  margin: 0;
+}
+.auth-title span { color: var(--orange); }
+.auth-badge {
+  background: rgba(232, 98, 42, 0.12);
+  color: var(--orange);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+.auth-desc {
+  font-size: 11.5px;
+  color: var(--text-desc);
+  line-height: 1.45;
+}
+</style>
+</head>
+<body>
+
+<!-- ADMIN PIN AUTHENTICATION OVERLAY -->
+<div id="adminAuthOverlay" class="admin-auth-overlay">
+  <div class="admin-auth-card">
+    <div class="auth-icon-wrap">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+    <h2 class="auth-title">Shekhawat <span>Studio</span></h2>
+    <div class="auth-badge"><i class="fa-solid fa-lock"></i> Owner Access Only</div>
+    <p class="auth-desc">This publishing tool is private. Enter the 4-digit Admin PIN to unlock the editor and manage articles.</p>
+    
+    <form id="adminPinForm" onsubmit="event.preventDefault(); verifyAdminPin();" style="display:flex; flex-direction:column; gap:12px; width:100%;">
+      <div style="position:relative; width:100%;">
+        <input type="password" id="adminPinInput" class="calc-input" maxlength="8" placeholder="Enter PIN" autofocus autocomplete="current-password" style="text-align:center; letter-spacing:4px; font-size:16px; font-weight:700; padding:12px;">
+      </div>
+      <div id="pinErrorMsg" style="display:none; color:#dc2626; font-size:11.5px; font-weight:600; text-align:center;">
+        <i class="fa-solid fa-circle-exclamation"></i> Incorrect PIN. Please try again.
+      </div>
+      <button type="submit" class="calc-order-btn" style="width:100%; background:var(--navy); padding:12px; font-size:13px;">
+        <i class="fa-solid fa-key"></i> Unlock Publishing Studio
+      </button>
+      <a href="blog.html" style="text-align:center; font-size:11.5px; color:var(--text-label); text-decoration:none; margin-top:4px;">
+        <i class="fa-solid fa-arrow-left"></i> Return to Public Blog
+      </a>
+    </form>
+  </div>
+</div>
+
+
+
+<div class="card-wrap">
+
+  <!-- ═══ LEFT SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="trusted-badge">
+      <i class="fa-solid fa-feather-pointed"></i>
+      <span>Blog Publishing<br>Studio &bull; Admin</span>
+    </div>
+
+    <a href="index.html" class="logo-ring-link" title="Shekhawat Packers Home">
+      <div class="logo-ring">
+        <div class="logo-wrap">
+          <img src="logo.webp" alt="Shekhawat Packers Logo" class="logo-img" onerror="this.src='https://shekhawat-packers.netlify.app/logo.webp'">
+        </div>
+      </div>
+    </a>
+
+    <div class="sidebar-rule"></div>
+
+    <div class="prod-tags-label">Quick Actions</div>
+    <div class="prod-tags">
+      <a href="blog.html" class="prod-tag"><i class="fa-solid fa-arrow-left"></i> View Blog</a>
+      <a href="index.html" class="prod-tag">Home</a>
+      <a href="products.html" class="prod-tag">Products</a>
+    </div>
+
+    <div class="sidebar-badges">
+      <div class="sidebar-badge-item">
+        <i class="fa-solid fa-code"></i>
+        <span>Zero Coding Required</span>
+      </div>
+      <div class="sidebar-badge-item">
+        <i class="fa-solid fa-download"></i>
+        <span>1-Click HTML Generator</span>
+      </div>
+      <div class="sidebar-badge-item">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Instant Live Preview</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ RIGHT CONTENT ═══ -->
+  <main class="content">
+
+    <!-- NAV BAR -->
+    <nav class="nav-bar">
+      <div class="nav-brand">Shekhawat <span>Studio</span></div>
+      <div class="nav-tabs">
+        <a href="index.html" class="nav-tab">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="products.html" class="nav-tab">
+          <i class="fa-solid fa-boxes-stacked"></i> Products
+        </a>
+        <a href="about.html" class="nav-tab">
+          <i class="fa-solid fa-circle-info"></i> About
+        </a>
+        <a href="blog.html" class="nav-tab">
+          <i class="fa-solid fa-newspaper"></i> Blog
+        </a>
+        <a href="admin.html" class="nav-tab active">
+          <i class="fa-solid fa-pen-nib"></i> Studio
+        </a>
+      </div>
+      <button type="button" onclick="lockStudio()" class="tool-btn" style="background:rgba(232,98,42,0.12); color:var(--orange); border-color:var(--orange); font-size:11px; padding:6px 12px; margin-left:12px;" title="Lock Studio and require PIN again">
+        <i class="fa-solid fa-lock"></i> Lock Studio
+      </button>
+    </nav>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <div class="main-content">
+
+      <div>
+        <div class="eyebrow">Private Content Studio &bull; Write &amp; Publish</div>
+        <h1 class="page-title">Blog <span>Publishing Studio</span></h1>
+        <p style="font-size: 11.5px; color: var(--text-label); margin-top: 2px;">
+          Privately publish new packaging guides and industry articles. Choose whether to keep as a private draft or publish live to the website.
+        </p>
+      </div>
+
+      <!-- Editor Mode Tabs -->
+      <div class="tabs-header">
+        <button class="tab-btn active" id="btnEditTab" onclick="switchTab('edit')">
+          <i class="fa-solid fa-pen-to-square"></i> Article Editor
+        </button>
+        <button class="tab-btn" id="btnPrevTab" onclick="switchTab('preview')">
+          <i class="fa-solid fa-eye"></i> Live Preview
+        </button>
+      </div>
+
+      <!-- EDIT TAB -->
+      <div id="editTab">
+        <form class="admin-card" onsubmit="event.preventDefault();">
+
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap:10px;">
+            <div class="calc-field">
+              <label class="calc-label">Article Title</label>
+              <input type="text" id="postTitleInput" class="calc-input" placeholder="e.g. Top 5 Tips for Safe Garment Packaging" oninput="updateSlugLive(this.value)">
+            </div>
+            <div class="calc-field">
+              <label class="calc-label">Category</label>
+              <select id="postCatInput" class="calc-select">
+                <option value="Packaging Tips">Packaging Tips</option>
+                <option value="Product Guide">Product Guide</option>
+                <option value="Sustainability">Sustainability</option>
+                <option value="Cost Saving">Cost Saving</option>
+                <option value="Industry Trends">Industry Trends</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap:10px;">
+            <div class="calc-field">
+              <label class="calc-label">URL Slug (filename)</label>
+              <input type="text" id="postSlugInput" class="calc-input" placeholder="e.g. top-5-tips-garment-packaging">
+            </div>
+            <div class="calc-field">
+              <label class="calc-label">Read Time</label>
+              <input type="text" id="postReadTimeInput" class="calc-input" value="4 Min Read">
+            </div>
+            <div class="calc-field">
+              <label class="calc-label">Author Name</label>
+              <input type="text" id="postAuthorInput" class="calc-input" value="Himmat Singh">
+            </div>
+            <div class="calc-field">
+              <label class="calc-label">Publish Status</label>
+              <select id="postStatusInput" class="calc-select" style="font-weight:600;">
+                <option value="draft">🔒 Draft (Private - Not Public)</option>
+                <option value="published" selected>🌐 Published (Public on Website)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="calc-field">
+            <label class="calc-label">Summary / Excerpt (1-2 sentences for card)</label>
+            <textarea id="postSummaryInput" class="calc-input" rows="2" placeholder="Brief description summarizing the key benefit or takeaway..."></textarea>
+          </div>
+
+          <!-- Formatting Helper Toolbar -->
+          <div class="calc-field">
+            <label class="calc-label">Article Content (HTML / Text)</label>
+            <div class="editor-toolbar">
+              <button type="button" class="tool-btn" onclick="insertSnippet('h3')"><i class="fa-solid fa-heading"></i> + Section (H3)</button>
+              <button type="button" class="tool-btn" onclick="insertSnippet('h4')"><i class="fa-solid fa-heading" style="font-size:10px;"></i> + Subtitle (H4)</button>
+              <button type="button" class="tool-btn" onclick="insertSnippet('p')"><i class="fa-solid fa-paragraph"></i> + Paragraph</button>
+              <button type="button" class="tool-btn" onclick="insertSnippet('ul')"><i class="fa-solid fa-list-ul"></i> + Bullet List</button>
+              <button type="button" class="tool-btn" onclick="insertSnippet('tip')"><i class="fa-solid fa-lightbulb"></i> + Tip Box</button>
+              <button type="button" class="tool-btn" onclick="insertSnippet('cta')"><i class="fa-brands fa-whatsapp"></i> + WhatsApp Button</button>
+            </div>
+            <textarea id="postContentInput" class="content-textarea" placeholder="Write your article content here. Use the toolbar buttons above to easily insert sections, subtitles, and bullet points..."></textarea>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-grid">
+            <button type="button" class="calc-order-btn" style="background:#1da851; padding:12px;" onclick="publishPostLocal()">
+              <i class="fa-solid fa-cloud-arrow-up"></i> 1. Publish Live to Site
+            </button>
+            <button type="button" class="calc-order-btn" style="background:var(--navy); padding:12px;" onclick="downloadStandaloneHTML()">
+              <i class="fa-solid fa-file-arrow-down"></i> 2. Download Standalone .html
+            </button>
+            <button type="button" class="calc-order-btn" style="background:var(--orange); padding:12px;" onclick="copyDataSnippet()">
+              <i class="fa-regular fa-copy"></i> 3. Copy Code Snippet
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- PREVIEW TAB -->
+      <div id="prevTab" class="live-preview-box">
+        <div style="border-bottom:1px solid var(--item-border); padding-bottom:10px; margin-bottom:14px;">
+          <span class="spec-chip" id="prevCatBadge" style="background:var(--navy); color:white;">Category</span>
+          <span style="font-size:10px; color:var(--text-label); margin-left:8px;" id="prevMetaInfo">4 Min Read &bull; By Himmat Singh</span>
+          <h2 class="page-title" id="prevTitle" style="font-size:26px; margin-top:8px;">Article Preview Title</h2>
+          <p id="prevSummary" style="font-size:12px; color:var(--text-label); font-style:italic; margin-top:4px;"></p>
+        </div>
+        <div id="prevContent" style="line-height:1.7;">
+          <p style="color:var(--text-desc);">Article content will preview here...</p>
+        </div>
+      </div>
+
+      <!-- Manage Custom Published Posts -->
+      <div class="coverage-box" style="margin-top:10px;">
+        <div class="coverage-header">
+          <i class="fa-solid fa-list-check"></i> Custom Published Articles
+        </div>
+        <div id="customPostsList" style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+          <span style="font-size:11px; color:var(--text-label);">No custom posts published yet. Use the editor above to create one!</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="js/blog-data.js"></script>
+<script src="js/common.js"></script>
+<script>
+// Auto-generate clean slug from title
+function updateSlugLive(title) {
+  const slug = title.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/[\s_-]+/g, '-');
+  document.getElementById('postSlugInput').value = slug;
+}
+
+// Editor Snippet Inserter
+function insertSnippet(type) {
+  const textarea = document.getElementById('postContentInput');
+  let snippet = '';
+
+  switch (type) {
+    case 'h3':
+      snippet = `\n<h3>New Section Heading Here</h3>\n<p>Explain your key topic or concept clearly.</p>\n`;
+      break;
+    case 'h4':
+      snippet = `\n<h4>Key Point or Feature Title</h4>\n<p>Details about this specific feature or specification.</p>\n`;
+      break;
+    case 'p':
+      snippet = `\n<p>Write your detailed paragraph content here.</p>\n`;
+      break;
+    case 'ul':
+      snippet = `\n<ul>\n  <li><strong>Point 1:</strong> Specification or benefit.</li>\n  <li><strong>Point 2:</strong> Specification or benefit.</li>\n  <li><strong>Point 3:</strong> Specification or benefit.</li>\n</ul>\n`;
+      break;
+    case 'tip':
+      snippet = `\n<div class="tip-callout">\n  <strong>Expert Tip:</strong> Helpful advice from Himmat Singh for wholesale buyers.\n</div>\n`;
+      break;
+    case 'cta':
+      snippet = `\n<div class="coverage-box" style="margin-top:14px;">\n  <div style="font-weight:700; color:var(--text-title);">Have Questions About This?</div>\n  <p style="font-size:12px; margin:4px 0 8px;">Contact Himmat Singh directly for wholesale rate quotations.</p>\n  <a href="https://wa.me/919582392131" target="_blank" class="cta-btn cta-wa" style="width:fit-content; text-decoration:none; padding:8px 16px;">Chat on WhatsApp</a>\n</div>\n`;
+      break;
+  }
+
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const text = textarea.value;
+  textarea.value = text.substring(0, start) + snippet + text.substring(end);
+  textarea.focus();
+}
+
+// Switch between Editor and Preview tabs
+function switchTab(tab) {
+  const editTab = document.getElementById('editTab');
+  const prevTab = document.getElementById('prevTab');
+  const btnEdit = document.getElementById('btnEditTab');
+  const btnPrev = document.getElementById('btnPrevTab');
+
+  if (tab === 'preview') {
+    editTab.style.display = 'none';
+    prevTab.classList.add('active');
+    btnEdit.classList.remove('active');
+    btnPrev.classList.add('active');
+
+    // Populate preview
+    const title = document.getElementById('postTitleInput').value || 'Untitled Article';
+    const cat = document.getElementById('postCatInput').value;
+    const read = document.getElementById('postReadTimeInput').value || '4 Min Read';
+    const author = document.getElementById('postAuthorInput').value || 'Himmat Singh';
+    const summary = document.getElementById('postSummaryInput').value || '';
+    const content = document.getElementById('postContentInput').value || '<p>No content written yet.</p>';
+
+    document.getElementById('prevTitle').textContent = title;
+    document.getElementById('prevCatBadge').textContent = cat;
+    document.getElementById('prevMetaInfo').textContent = `${read} • By ${author}`;
+    document.getElementById('prevSummary').textContent = summary;
+    document.getElementById('prevContent').innerHTML = content;
+  } else {
+    editTab.style.display = 'block';
+    prevTab.classList.remove('active');
+    btnEdit.classList.add('active');
+    btnPrev.classList.remove('active');
+  }
+}
+
+// PIN Authentication Logic
+const DEFAULT_ADMIN_PIN = '1408';
+
+function getAdminPin() {
+  return localStorage.getItem('sp_admin_pin') || DEFAULT_ADMIN_PIN;
+}
+
+function checkAdminAuth() {
+  const isAuth = sessionStorage.getItem('sp_admin_auth') === 'true';
+  const overlay = document.getElementById('adminAuthOverlay');
+  if (overlay) {
+    if (isAuth) {
+      overlay.classList.add('unlocked');
+    } else {
+      overlay.classList.remove('unlocked');
+      setTimeout(() => {
+        const input = document.getElementById('adminPinInput');
+        if (input) input.focus();
+      }, 100);
+    }
+  }
+}
+
+function verifyAdminPin() {
+  const input = document.getElementById('adminPinInput');
+  const errorMsg = document.getElementById('pinErrorMsg');
+  const enteredPin = (input?.value || '').trim();
+
+  if (enteredPin === getAdminPin()) {
+    sessionStorage.setItem('sp_admin_auth', 'true');
+    if (errorMsg) errorMsg.style.display = 'none';
+    const overlay = document.getElementById('adminAuthOverlay');
+    if (overlay) overlay.classList.add('unlocked');
+    showToast('Studio unlocked. Welcome, Himmat Singh!');
+    if (input) input.value = '';
+  } else {
+    if (errorMsg) errorMsg.style.display = 'block';
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
+  }
+}
+
+function lockStudio() {
+  sessionStorage.removeItem('sp_admin_auth');
+  checkAdminAuth();
+  showToast('Publishing Studio locked.');
+}
+
+// Publish post to localStorage (live immediate site update)
+function publishPostLocal() {
+  const title = document.getElementById('postTitleInput').value.trim();
+  const slug = document.getElementById('postSlugInput').value.trim();
+  const cat = document.getElementById('postCatInput').value;
+  const read = document.getElementById('postReadTimeInput').value.trim() || '4 Min Read';
+  const author = document.getElementById('postAuthorInput').value.trim() || 'Himmat Singh';
+  const status = document.getElementById('postStatusInput').value || 'draft';
+  const isPublic = (status === 'published');
+  const summary = document.getElementById('postSummaryInput').value.trim();
+  const content = document.getElementById('postContentInput').value.trim();
+
+  if (!title || !slug) {
+    alert('Please enter an Article Title and Slug.');
+    return;
+  }
+
+  const newPost = {
+    id: slug,
+    title: title,
+    category: cat,
+    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    readTime: read,
+    author: author,
+    authorRole: 'Founder & Packaging Expert',
+    summary: summary || title,
+    content: content,
+    status: status,
+    isPublic: isPublic
+  };
+
+  try {
+    const existing = JSON.parse(localStorage.getItem('sp_custom_blogs') || '[]');
+    const filtered = existing.filter(p => p.id !== slug);
+    filtered.unshift(newPost);
+    localStorage.setItem('sp_custom_blogs', JSON.stringify(filtered));
+
+    if (isPublic) {
+      showToast('Published publicly to live site!');
+    } else {
+      showToast('Saved as Private Draft (Hidden from public site)!');
+    }
+    loadCustomPostsList();
+
+    setTimeout(() => {
+      if (confirm(isPublic ? 'Article published live! Would you like to view it on the website now?' : 'Article saved as private draft! Would you like to preview it now?')) {
+        window.location.href = `post.html?id=${slug}`;
+      }
+    }, 400);
+  } catch(e) {
+    alert('Could not save post: ' + e.message);
+  }
+}
+
+// Generate & Download 1-Click Standalone HTML Page
+function downloadStandaloneHTML() {
+  const title = document.getElementById('postTitleInput').value.trim() || 'Custom Packaging Guide';
+  const slug = document.getElementById('postSlugInput').value.trim() || 'custom-guide';
+  const cat = document.getElementById('postCatInput').value;
+  const read = document.getElementById('postReadTimeInput').value.trim() || '4 Min Read';
+  const author = document.getElementById('postAuthorInput').value.trim() || 'Himmat Singh';
+  const summary = document.getElementById('postSummaryInput').value.trim() || title;
+  const content = document.getElementById('postContentInput').value.trim() || `<p>${summary}</p>`;
+  const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+  const htmlContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/webp" href="../logo.webp">
+<title>${title} | Shekhawat Packers</title>
+<meta name="description" content="${summary.replace(/"/g, '&quot;')}">
+<link rel="canonical" href="https://shekhawat-packers.netlify.app/blog/${slug}.html">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.article-container { display: flex; flex-direction: column; gap: 16px; line-height: 1.7; }
+.article-header { border-bottom: 1px solid var(--item-border); padding-bottom: 14px; }
+.article-meta { display: flex; align-items: center; gap: 8px; font-size: 9.5px; font-weight: 700; text-transform: uppercase; color: var(--text-label); letter-spacing: 1px; margin-bottom: 6px; }
+.article-meta span.dot { width: 4px; height: 4px; border-radius: 50%; background: var(--orange); }
+.article-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 700; color: var(--text-title); margin: 18px 0 8px; line-height: 1.25; }
+.article-body h4 { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--orange); margin: 14px 0 6px; }
+.article-body p { color: var(--text-desc); font-size: 13.5px; line-height: 1.7; margin-bottom: 12px; }
+.article-body ul, .article-body ol { padding-left: 22px; color: var(--text-desc); font-size: 13.5px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 6px; }
+.tip-callout { background: var(--bg-feature); border-left: 3.5px solid var(--orange); border-radius: 0 10px 10px 0; padding: 12px 16px; margin: 14px 0; font-size: 13px; color: var(--text-main); }
+</style>
+</head>
+<body>
+
+
+
+<div class="card-wrap">
+  <aside class="sidebar">
+    <div class="trusted-badge">
+      <i class="fa-solid fa-shield-halved"></i>
+      <span>Trusted Packaging<br>Supplier in Delhi NCR</span>
+    </div>
+    <a href="../index.html" class="logo-ring-link" title="Shekhawat Packers Home">
+      <div class="logo-ring">
+        <div class="logo-wrap">
+          <img src="../logo.webp" alt="Shekhawat Packers Logo" class="logo-img" onerror="this.src='https://shekhawat-packers.netlify.app/logo.webp'">
+        </div>
+      </div>
+    </a>
+    <div class="sidebar-rule"></div>
+    <div class="prod-tags-label">Related Supplies</div>
+    <div class="prod-tags">
+      <a href="../products.html" class="prod-tag">Corrugated Boxes</a>
+      <a href="../products.html" class="prod-tag">BOPP Tapes</a>
+      <a href="../products.html" class="prod-tag">Stretch Film</a>
+      <a href="../products.html" class="prod-tag">Jute Bags</a>
+    </div>
+    <div class="sidebar-badges">
+      <div class="sidebar-badge-item"><i class="fa-solid fa-industry"></i><span>Factory Direct Stock</span></div>
+      <div class="sidebar-badge-item"><i class="fa-solid fa-comments"></i><span>Ask Himmat Singh</span></div>
+      <div class="sidebar-badge-item"><i class="fa-solid fa-truck"></i><span>Same-Day Dispatch</span></div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <nav class="nav-bar">
+      <div class="nav-brand">Shekhawat <span>Packers</span></div>
+      <div class="nav-tabs">
+        <a href="../index.html" class="nav-tab"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="../products.html" class="nav-tab"><i class="fa-solid fa-boxes-stacked"></i> Products</a>
+        <a href="../about.html" class="nav-tab"><i class="fa-solid fa-circle-info"></i> About</a>
+        <a href="../blog.html" class="nav-tab active"><i class="fa-solid fa-newspaper"></i> Blog</a>
+        <a href="../contact.html" class="nav-tab"><i class="fa-solid fa-envelope"></i> Contact</a>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+        <a href="../blog.html" class="featured-btn" style="background:var(--bg-feature); color:var(--text-main); border:1px solid var(--item-border); padding:6px 12px; margin:0;">
+          <i class="fa-solid fa-arrow-left"></i> All Blog Posts
+        </a>
+        <span style="font-size:10px; color:var(--text-label);">Home &gt; Blog &gt; ${title}</span>
+      </div>
+
+      <article class="article-container">
+        <header class="article-header">
+          <div class="article-meta">
+            <span class="spec-chip" style="background:var(--navy); color:white;">${cat}</span>
+            <span class="dot"></span>
+            <span>${dateStr}</span>
+            <span class="dot"></span>
+            <span>${read}</span>
+          </div>
+          <h1 class="page-title" style="font-size:clamp(24px, 3vw, 34px);">${title}</h1>
+        </header>
+
+        <div class="article-body">
+          ${content}
+        </div>
+
+        <div class="blog-author-box">
+          <div class="blog-author-avatar"><i class="fa-solid fa-user-tie"></i></div>
+          <div>
+            <strong style="color:var(--text-main); font-size:14px;">${author}</strong><br>
+            <span style="color:var(--text-label); font-size:11.5px;">Founder &amp; Packaging Specialist &bull; Shekhawat Packers</span>
+          </div>
+        </div>
+
+        <div class="coverage-box" style="margin-top:8px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:700; font-size:14px; color:var(--text-title);">Have Questions About This?</div>
+              <div style="font-size:11.5px; color:var(--text-desc);">Discuss your packaging requirements with Himmat Singh on WhatsApp.</div>
+            </div>
+            <a href="https://wa.me/919582392131?text=Hello%20Himmat%20Singh%20ji%2C%20I%20read%20your%20article%20on%20%22${encodeURIComponent(title)}%22." target="_blank" class="cta-btn cta-wa" style="text-decoration:none; padding:10px 18px;">
+              <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</div>
+
+${'<' + 'script src="../js/common.js"><' + '/script>'}
+</body>
+</html>`;
+
+  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${slug}.html`;
+  document.body.appendChild(a);
+  a.click();
+
+  setTimeout(() => {
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast(`Downloaded ${slug}.html ready for blog/ folder!`);
+  }, 250);
+}
+
+// Copy JS code snippet
+function copyDataSnippet() {
+  const title = document.getElementById('postTitleInput').value.trim() || 'Untitled';
+  const slug = document.getElementById('postSlugInput').value.trim() || 'untitled';
+  const cat = document.getElementById('postCatInput').value;
+  const read = document.getElementById('postReadTimeInput').value.trim() || '4 min read';
+  const summary = document.getElementById('postSummaryInput').value.trim() || title;
+  const content = document.getElementById('postContentInput').value.trim() || '';
+
+  const snippet = `  {
+    id: ${JSON.stringify(slug)},
+    title: ${JSON.stringify(title)},
+    category: ${JSON.stringify(cat)},
+    date: ${JSON.stringify(new Date().toISOString().split('T')[0])},
+    readTime: ${JSON.stringify(read)},
+    author: 'Himmat Singh',
+    authorRole: 'Founder & Packaging Expert',
+    badge: 'Guide',
+    summary: ${JSON.stringify(summary)},
+    content: ${JSON.stringify(content)}
+  },`;
+
+  copyText(snippet, 'Blog data snippet');
+}
+
+// Render list of custom posts in localStorage
+function loadCustomPostsList() {
+  const container = document.getElementById('customPostsList');
+  if (!container) return;
+
+  try {
+    const posts = JSON.parse(localStorage.getItem('sp_custom_blogs') || '[]');
+    if (!posts.length) {
+      container.innerHTML = '<span style="font-size:11px; color:var(--text-label);">No custom posts published yet. Use the editor above to create one!</span>';
+      return;
+    }
+
+    container.innerHTML = '';
+    posts.forEach(p => {
+      const isDraft = (p.status === 'draft' || p.isPublic === false);
+      const item = document.createElement('div');
+      item.className = 'post-manage-item';
+      item.innerHTML = `
+        <div>
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:3px;">
+            <strong style="color:var(--text-main); font-size:13px;">${p.title}</strong>
+            <span class="spec-chip" style="background:${isDraft ? '#fef3c7' : '#dcfce7'}; color:${isDraft ? '#92400e' : '#166534'}; font-weight:700;">
+              ${isDraft ? '<i class="fa-solid fa-lock"></i> Private Draft' : '<i class="fa-solid fa-globe"></i> Public Live'}
+            </span>
+          </div>
+          <div style="font-size:10px; color:var(--text-label);">${p.category} &bull; ${p.date} &bull; <code>${p.id}</code></div>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <button type="button" class="tool-btn" onclick="togglePostStatus('${p.id}')" title="Toggle between Public and Private Draft">
+            <i class="fa-solid fa-arrows-rotate"></i> ${isDraft ? 'Make Public' : 'Make Private'}
+          </button>
+          <a href="post.html?id=${p.id}" target="_blank" class="tool-btn"><i class="fa-solid fa-arrow-up-right-from-square"></i> Preview</a>
+          <button type="button" class="tool-btn" style="color:#e02424;" onclick="deleteCustomPost('${p.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+  } catch(e) {}
+}
+
+function togglePostStatus(id) {
+  try {
+    const posts = JSON.parse(localStorage.getItem('sp_custom_blogs') || '[]');
+    const post = posts.find(p => p.id === id);
+    if (!post) return;
+
+    const isCurrentlyDraft = (post.status === 'draft' || post.isPublic === false);
+    if (isCurrentlyDraft) {
+      post.status = 'published';
+      post.isPublic = true;
+      showToast(`'${post.title}' is now Public on the website!`);
+    } else {
+      post.status = 'draft';
+      post.isPublic = false;
+      showToast(`'${post.title}' is now a Private Draft.`);
+    }
+
+    localStorage.setItem('sp_custom_blogs', JSON.stringify(posts));
+    loadCustomPostsList();
+  } catch(e) {
+    alert('Could not update status: ' + e.message);
+  }
+}
+
+function deleteCustomPost(id) {
+  if (!confirm(`Delete article '${id}'?`)) return;
+  try {
+    const posts = JSON.parse(localStorage.getItem('sp_custom_blogs') || '[]');
+    const filtered = posts.filter(p => p.id !== id);
+    localStorage.setItem('sp_custom_blogs', JSON.stringify(filtered));
+    showToast('Deleted article from site');
+    loadCustomPostsList();
+  } catch(e) {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  checkAdminAuth();
+  loadCustomPostsList();
+});
+</script>
+</body>
+</html>

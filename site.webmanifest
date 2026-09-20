@@ -1,0 +1,16 @@
+{
+  "name": "Shekhawat Packers",
+  "short_name": "ShekhawatPackers",
+  "description": "Wholesale packaging materials supplier in Gandhi Nagar, Delhi NCR",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f5c97a",
+  "theme_color": "#1E3369",
+  "icons": [
+    {
+      "src": "logo.webp",
+      "sizes": "192x192 512x512",
+      "type": "image/webp"
+    }
+  ]
+}
